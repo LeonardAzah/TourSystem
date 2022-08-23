@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	  
+<head>
+<meta charset="UTF-8">
+<title>Home page</title>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container">
+		<h1>Welcome to our travel agency</h1>
+		
+		<a th:href="@{/addTour}" class="btn btn-primary">Add a new tour</a>
+		<a th:href="@{/showOffer}" class="btn btn-primary">Show our offer</a>
+		<a th:href="@{/showOfferForNextMonth}" class="btn btn-primary">Show next month offer</a>
+		<a th:href="@{/addComment}" class="btn btn-primary">Add comment</a>
+		<a sec:authorize="isAnonymous()" th:href="@{/login}" class="btn btn-secondary float-right">login</a>
+		<a sec:authorize="!isAnonymous()" th:href="@{/logout}" class="btn btn-secondary float-right">logout</a>
+		<br>
+		<br>
+		<div class="border border-success">
+		<p>Spring Security Example</p>
+		<div class="bg-primary text-white" sec:authorize="hasRole('ADMIN')">ADMINISTRATORS ONLY</div>
+		<div class="bg-secondary text-white" sec:authorize="hasRole('EMPLOYEE')">EMPLOYEE ONLY</div>
+		<div class="bg-warning text-black" sec:authorize="hasRole('CLIENT')">CLIENT ONLY</div>
+		<div class="bg-info text-white" sec:authorize="isAuthenticated()">Visible only to authenticated users</div>
+		<div>
+		Username: <span sec:authentication="name"></span>
+		</div>
+		<div>
+		User Role: <span sec:authorize="isAuthenticated()">
+		<span sec:authentication="principal.authority"></span>
+		</span>
+		</div>
+		</div>
+		
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
